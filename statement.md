@@ -1,12 +1,12 @@
 # Introduction
 
-XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. You should have at least a vague idea how do neural network work. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
+XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. You should have at least a vague idea how do neural networks work. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
 
 # First script
 
 This is simple script, an implementation of *this image*. 
 
-Here the neural network is bunch of loosely written variables. It is trained on xor examples for 10000 epochs, using stochastic gradient descent (or minibatch of size 1 if you like), so no matrix transpositions are needed. Learning rate is 0.1.
+Here the neural network is just a bunch of loosely written variables. It is trained on xor examples for 10000 epochs, using stochastic gradient descent (or minibatch of size 1 if you like), so no matrix transpositions are needed. Learning rate is 0.1.
 
 The 
 ```python runnable
@@ -145,7 +145,7 @@ Example output:
 1 1 0.06936586304646092
 ```
 
-Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization.
+Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with learning rate (alpha).
 
 
 # Advanced usage
