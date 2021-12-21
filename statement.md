@@ -2,10 +2,9 @@
 
 XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
 
+# First script
 
-# Welcome!
-
-This Python template lets you get started quickly with a simple one-page playground.
+This is simple script, an implementation of *this image*. 
 
 ```python runnable
 import random
@@ -107,21 +106,41 @@ for i in range(10000):
     for j in range(4):
         learn(INPUTS[j][0],INPUTS[j][1],OUTPUTS[j][0])
     
-    if i % 1000 == 0:
+    if (i+1) % 1000 == 0:
         cost = 0
         for j in range(4):
             o = predict(INPUTS[j][0],INPUTS[j][1])
             cost += (OUTPUTS[j][0] - o) ** 2
         cost /= 4
-        print(i, "mean squared error: ", cost)        
+        print(i+1, "mean squared error:", cost)        
         
 
 print(0,0,predict(0,0))
 print(1,0,predict(1,0))
 print(0,1,predict(0,1))
 print(1,1,predict(1,1))
+```
+
+Example output:
 
 ```
+1000 mean squared error: 0.25043568302238917
+2000 mean squared error: 0.24801422102485043
+3000 mean squared error: 0.22365932833686974
+4000 mean squared error: 0.1659592158614023
+5000 mean squared error: 0.06255497547316359
+6000 mean squared error: 0.02646935878578221
+7000 mean squared error: 0.014881272291265908
+8000 mean squared error: 0.009878225477102202
+9000 mean squared error: 0.00722792783749444
+10000 mean squared error: 0.005627144963647617
+0 0 0.08711147307771817
+1 0 0.9374852265298613
+0 1 0.9197240620893657
+1 1 0.06758585653349145
+```
+
+
 
 # Advanced usage
 
