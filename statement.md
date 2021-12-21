@@ -1,11 +1,14 @@
 # Introduction
 
-XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
+XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. You should have at least a vague idea how do neural network work. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
 
 # First script
 
 This is simple script, an implementation of *this image*. 
 
+Here the neural network is bunch of loosely written variables. It is trained on xor examples for 10000 epochs, using stochastic gradient descent (or minibatch of size 1 if you like), so no matrix transpositions are needed. Learning rate is 0.1.
+
+The 
 ```python runnable
 import random
 import math
@@ -103,7 +106,9 @@ OUTPUTS = [
 
 
 for i in range(10000):
-    for j in range(4):
+    indexes = [0,1,2,3]
+    random.shuffle(indexes)
+    for j in indexes:
         learn(INPUTS[j][0],INPUTS[j][1],OUTPUTS[j][0])
     
     if (i+1) % 1000 == 0:
@@ -112,7 +117,7 @@ for i in range(10000):
             o = predict(INPUTS[j][0],INPUTS[j][1])
             cost += (OUTPUTS[j][0] - o) ** 2
         cost /= 4
-        print(i+1, "mean squared error:", cost)        
+        print(i+1, "mean squared error:", cost)       
         
 
 print(0,0,predict(0,0))
@@ -124,22 +129,23 @@ print(1,1,predict(1,1))
 Example output:
 
 ```
-1000 mean squared error: 0.25043568302238917
-2000 mean squared error: 0.24801422102485043
-3000 mean squared error: 0.22365932833686974
-4000 mean squared error: 0.1659592158614023
-5000 mean squared error: 0.06255497547316359
-6000 mean squared error: 0.02646935878578221
-7000 mean squared error: 0.014881272291265908
-8000 mean squared error: 0.009878225477102202
-9000 mean squared error: 0.00722792783749444
-10000 mean squared error: 0.005627144963647617
-0 0 0.08711147307771817
-1 0 0.9374852265298613
-0 1 0.9197240620893657
-1 1 0.06758585653349145
+1000 mean squared error: 0.24979266353990032
+2000 mean squared error: 0.24831882619126208
+3000 mean squared error: 0.23561863285516624
+4000 mean squared error: 0.1780693775264198
+5000 mean squared error: 0.06912242900384753
+6000 mean squared error: 0.029067840008850473
+7000 mean squared error: 0.01615164457711759
+8000 mean squared error: 0.01062363347939824
+9000 mean squared error: 0.007720927162456013
+10000 mean squared error: 0.005980352776240471
+0 0 0.08988830233230768
+1 0 0.9260414851726995
+0 1 0.9254344628052803
+1 1 0.06936586304646092
 ```
 
+Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization.
 
 
 # Advanced usage
