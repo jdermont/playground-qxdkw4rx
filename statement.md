@@ -13,22 +13,22 @@ The
 import random
 import math
 
-w1 = random.uniform(-0.5,0.5)
-w2 = random.uniform(-0.5,0.5)
-b1 = random.uniform(-0.5,0.5)
+w1 = random.uniform(-0.1,0.1)
+w2 = random.uniform(-0.1,0.1)
+b1 = random.uniform(-0.1,0.1)
 
-w3 = random.uniform(-0.5,0.5)
-w4 = random.uniform(-0.5,0.5)
-b2 = random.uniform(-0.5,0.5)
+w3 = random.uniform(-0.1,0.1)
+w4 = random.uniform(-0.1,0.1)
+b2 = random.uniform(-0.1,0.1)
 
-w5 = random.uniform(-0.5,0.5)
-w6 = random.uniform(-0.5,0.5)
-b3 = random.uniform(-0.5,0.5)
+w5 = random.uniform(-0.1,0.1)
+w6 = random.uniform(-0.1,0.1)
+b3 = random.uniform(-0.1,0.1)
 
-o1 = random.uniform(-0.5,0.5)
-o2 = random.uniform(-0.5,0.5)
-o3 = random.uniform(-0.5,0.5)
-ob = random.uniform(-0.5,0.5)
+o1 = random.uniform(-0.1,0.1)
+o2 = random.uniform(-0.1,0.1)
+o3 = random.uniform(-0.1,0.1)
+ob = random.uniform(-0.1,0.1)
 
 def sigmoid(x):
     return 1.0 / (1.0 + math.exp(-x))
