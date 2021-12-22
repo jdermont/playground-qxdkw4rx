@@ -8,27 +8,28 @@ This is simple script, an implementation of *this image*.
 
 Here the neural network is just a bunch of loosely written variables. It is trained on xor examples for 10000 epochs, using stochastic gradient descent (or minibatch of size 1 if you like), so no matrix transpositions are needed. Learning rate is 0.1.
 
-The 
 ```python runnable
 import random
 import math
 
-w1 = random.uniform(-0.1,0.1)
-w2 = random.uniform(-0.1,0.1)
-b1 = random.uniform(-0.1,0.1)
+VARIANCE_W = 0.5
+VARIANCE_B = 0.1
+w1 = random.uniform(-VARIANCE_W,VARIANCE_W)
+w2 = random.uniform(-VARIANCE_W,VARIANCE_W)
+b1 = random.uniform(-VARIANCE_B,VARIANCE_B)
 
-w3 = random.uniform(-0.1,0.1)
-w4 = random.uniform(-0.1,0.1)
-b2 = random.uniform(-0.1,0.1)
+w3 = random.uniform(-VARIANCE_W,VARIANCE_W)
+w4 = random.uniform(-VARIANCE_W,VARIANCE_W)
+b2 = random.uniform(-VARIANCE_B,VARIANCE_B)
 
-w5 = random.uniform(-0.1,0.1)
-w6 = random.uniform(-0.1,0.1)
-b3 = random.uniform(-0.1,0.1)
+w5 = random.uniform(-VARIANCE_W,VARIANCE_W)
+w6 = random.uniform(-VARIANCE_W,VARIANCE_W)
+b3 = random.uniform(-VARIANCE_B,VARIANCE_B)
 
-o1 = random.uniform(-0.1,0.1)
-o2 = random.uniform(-0.1,0.1)
-o3 = random.uniform(-0.1,0.1)
-ob = random.uniform(-0.1,0.1)
+o1 = random.uniform(-VARIANCE_W,VARIANCE_W)
+o2 = random.uniform(-VARIANCE_W,VARIANCE_W)
+o3 = random.uniform(-VARIANCE_W,VARIANCE_W)
+ob = random.uniform(-VARIANCE_B,VARIANCE_B)
 
 def sigmoid(x):
     return 1.0 / (1.0 + math.exp(-x))
@@ -52,10 +53,9 @@ def predict(i1,i2):
     return output
 
 
-def learn(i1,i2,target):
+def learn(i1,i2,target, alpha=0.1):
     global w1,w2,b1,w3,w4,b2,w5,w6,b3
     global o1,o2,o3,ob
-    alpha = 0.1
     
     s1 = w1 * i1 + w2 * i2 + b1
     s1 = sigmoid(s1)
@@ -105,19 +105,19 @@ OUTPUTS = [
     ]
 
 
-for i in range(10000):
+for i in range(1,10001):
     indexes = [0,1,2,3]
     random.shuffle(indexes)
     for j in indexes:
-        learn(INPUTS[j][0],INPUTS[j][1],OUTPUTS[j][0])
+        learn(INPUTS[j][0],INPUTS[j][1],OUTPUTS[j][0], alpha=0.2)
     
-    if (i+1) % 1000 == 0:
+    if i%1000 == 0:
         cost = 0
         for j in range(4):
             o = predict(INPUTS[j][0],INPUTS[j][1])
             cost += (OUTPUTS[j][0] - o) ** 2
         cost /= 4
-        print(i+1, "mean squared error:", cost)       
+        print(i, "mean squared error:", cost)       
         
 
 print(0,0,predict(0,0))
