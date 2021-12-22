@@ -70,9 +70,9 @@ def learn(i1,i2,target):
     error = target - output
     derror = error * sigmoid_prime(output)
     
-    ds1 = derror * sigmoid_prime(s1)
-    ds2 = derror * sigmoid_prime(s2)
-    ds3 = derror * sigmoid_prime(s3)
+    ds1 = derror * o1 * sigmoid_prime(s1)
+    ds2 = derror * o2 * sigmoid_prime(s2)
+    ds3 = derror * o3 * sigmoid_prime(s3)
     
     o1 += alpha * s1 * derror
     o2 += alpha * s2 * derror
