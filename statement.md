@@ -1,12 +1,14 @@
 # Introduction
 
-XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial. You should have at least a vague idea how do neural networks work. This article is intended to provide building blocks in form of simple python scripts. No libraries, no numpy are used to build this simple neural network. Beware the style of the python scripts is hackatonish, but I hope more easily understood this way.
+XOR example is a toy problem, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial, there are plenty of them out there. I assume you have some vague knowledge of neural networks and try to write simple one. This article is just a bunch of simple python scripts that implement neural networks. No numpy or other libraries are used, so they should be easily translatable to other languages.
+
+All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions. The loss function is mean squared error.
 
 # First script
 
-This is simple script, an implementation of *this image*. 
+This is the simplest script, an implementation of *this image*. 
 
-Here the neural network is just a bunch of loosely written variables. It is trained on xor examples for 10000 epochs, using stochastic gradient descent (or minibatch of size 1 if you like), so no matrix transpositions are needed. Learning rate is 0.1.
+Here the neural network is just a bunch of loosely written variables.
 
 ```python runnable
 import random
@@ -31,6 +33,7 @@ o2 = random.uniform(-VARIANCE_W,VARIANCE_W)
 o3 = random.uniform(-VARIANCE_W,VARIANCE_W)
 ob = random.uniform(-VARIANCE_B,VARIANCE_B)
 
+
 def sigmoid(x):
     return 1.0 / (1.0 + math.exp(-x))
 
@@ -53,7 +56,7 @@ def predict(i1,i2):
     return output
 
 
-def learn(i1,i2,target, alpha=0.1):
+def learn(i1,i2,target, alpha=0.2):
     global w1,w2,b1,w3,w4,b2,w5,w6,b3
     global o1,o2,o3,ob
     
@@ -105,19 +108,19 @@ OUTPUTS = [
     ]
 
 
-for i in range(1,10001):
+for epoch in range(1,10001):
     indexes = [0,1,2,3]
     random.shuffle(indexes)
     for j in indexes:
         learn(INPUTS[j][0],INPUTS[j][1],OUTPUTS[j][0], alpha=0.2)
     
-    if i%1000 == 0:
+    if epoch%1000 == 0:
         cost = 0
         for j in range(4):
             o = predict(INPUTS[j][0],INPUTS[j][1])
             cost += (OUTPUTS[j][0] - o) ** 2
         cost /= 4
-        print(i, "mean squared error:", cost)       
+        print(epoch, "mean squared error:", cost)       
         
 
 print(0,0,predict(0,0))
@@ -145,7 +148,7 @@ Example output:
 1 1 0.06936586304646092
 ```
 
-Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with learning rate (alpha).
+Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with the learning rate (alpha) or the random bounds (VARIANCE_W, VARIANCE_B).
 
 
 # Advanced usage
