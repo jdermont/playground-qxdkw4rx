@@ -132,20 +132,20 @@ print(1,1,predict(1,1))
 Example output:
 
 ```
-1000 mean squared error: 0.24979266353990032
-2000 mean squared error: 0.24831882619126208
-3000 mean squared error: 0.23561863285516624
-4000 mean squared error: 0.1780693775264198
-5000 mean squared error: 0.06912242900384753
-6000 mean squared error: 0.029067840008850473
-7000 mean squared error: 0.01615164457711759
-8000 mean squared error: 0.01062363347939824
-9000 mean squared error: 0.007720927162456013
-10000 mean squared error: 0.005980352776240471
-0 0 0.08988830233230768
-1 0 0.9260414851726995
-0 1 0.9254344628052803
-1 1 0.06936586304646092
+epoch 1000 mean squared error: 0.2499876271419115
+epoch 2000 mean squared error: 0.2499688242837126
+epoch 3000 mean squared error: 0.24988612392100873
+epoch 4000 mean squared error: 0.24903213808270375
+epoch 5000 mean squared error: 0.20392068756493792
+epoch 6000 mean squared error: 0.06346297881590131
+epoch 7000 mean squared error: 0.01137474589491641
+epoch 8000 mean squared error: 0.005176747319816359
+epoch 9000 mean squared error: 0.0031937304736529845
+epoch 10000 mean squared error: 0.0022656890991194886
+0 0 0.027649625886219092
+1 0 0.95846511144229
+0 1 0.9433905288343537
+1 1 0.05803856813942385
 ```
 
 Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with the learning rate (alpha) or the random bounds (VARIANCE_W, VARIANCE_B).
