@@ -120,7 +120,7 @@ for epoch in range(1,10001):
             o = predict(INPUTS[j][0],INPUTS[j][1])
             cost += (OUTPUTS[j][0] - o) ** 2
         cost /= 4
-        print(epoch, "mean squared error:", cost)       
+        print("epoch", epoch, "mean squared error:", cost)       
         
 
 print(0,0,predict(0,0))
