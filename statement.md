@@ -6,7 +6,7 @@ All the scripts use stochastic gradient descent to train the neural network, one
 
 # First script
 
-This is the simplest script, an implementation of *this image*. 
+This is the simplest script, an implementation of ![temporary nn](ugly.png "NN"). 
 
 Here the neural network is just a bunch of loosely written variables.
 
