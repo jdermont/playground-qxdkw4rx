@@ -174,18 +174,19 @@ for _ in range(HIDDEN):
 
 hidden_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(HIDDEN)]
 
+output_weights = []
+for _ in range(OUTPUTS):
+    output_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(HIDDEN)])
+    
+output_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(OUTPUTS)]
+
+
 def sigmoid(x):
     return 1.0 / (1.0 + math.exp(-x))
 
 
 def sigmoid_prime(x): # x already sigmoided
     return x * (1 - x)
-
-output_weights = []
-for _ in range(OUTPUTS):
-    output_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(HIDDEN)])
-    
-output_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(OUTPUTS)]
 
 
 def predict(inputs):
