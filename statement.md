@@ -1,12 +1,14 @@
 # Introduction
 
-XOR example is a toy problem in machine learning community, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it). This isn't math heavy explanatory tutorial, there are plenty of them out there. I assume you have some vague knowledge of neural networks and try to write a simple one. This article is just a bunch of simple python scripts that implement neural networks. No numpy or other libraries are used, so they should be easily translatable to other languages.
+XOR example is a toy problem in machine learning community, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it).
+
+This isn't math heavy explanatory tutorial, there are plenty of them out there. I assume you have some vague knowledge of neural networks and try to write a simple one. This article is just a bunch of simple python scripts that implement neural networks. No numpy or other libraries are used, so they should be easily translatable to other languages.
 
 All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions. The loss function is mean squared error.
 
 # First script
 
-This is the simplest script, an implementation of ![temporary nn](ugly.png "NN"). 
+This is the simplest script, an implementation of ![temporary nn](ugly.png "NN")
 
 Here the neural network is just a bunch of loosely written variables.
 
@@ -153,7 +155,7 @@ Your mileage may vary. Sometimes this simple net will diverge and output for all
 
 # Second script
 
-This one is more flexible. With HIDDEN = 3, it behaves the same as the first script.
+This one is more flexible. The variables are stored in array and the for loops more resemble the matrix operations. With HIDDEN = 3, it behaves the same as the first script.
 
 ```python runnable
 import random
@@ -306,3 +308,6 @@ Example output:
 [1, 0] 0.9639200700462749
 [1, 1] 0.046386784641615345
 ```
+
+You can play around with the number of hidden units.
+
