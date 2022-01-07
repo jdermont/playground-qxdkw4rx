@@ -127,7 +127,6 @@ print(0,0,predict(0,0))
 print(1,0,predict(1,0))
 print(0,1,predict(0,1))
 print(1,1,predict(1,1))
-
 ```
 
 Example output:
@@ -152,6 +151,158 @@ epoch 10000 mean squared error: 0.0022656890991194886
 Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with the learning rate (alpha) or the random bounds (VARIANCE_W, VARIANCE_B).
 
 
-# Advanced usage
+# Second script
 
-If you want a more complex example (external libraries, viewers...), use the [Advanced Python template](https://tech.io/select-repo/429)
+This one is more flexible. With HIDDEN = 3, it behaves the same as the first script.
+
+```python runnable
+import random
+import math
+
+VARIANCE_W = 0.5
+VARIANCE_B = 0.1
+
+INPUTS = 2
+HIDDEN = 3
+OUTPUTS = 1
+
+hidden_weights = []
+for _ in range(HIDDEN):
+    hidden_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(INPUTS)])
+
+hidden_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(HIDDEN)]
+
+def sigmoid(x):
+    return 1.0 / (1.0 + math.exp(-x))
+
+
+def sigmoid_prime(x): # x already sigmoided
+    return x * (1 - x)
+
+output_weights = []
+for _ in range(OUTPUTS):
+    output_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(HIDDEN)])
+    
+output_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(OUTPUTS)]
+
+
+def predict(inputs):
+    hiddens = []
+    for i in range(HIDDEN):
+        hidden = 0
+        for j in range(INPUTS):
+            hidden += hidden_weights[i][j] * inputs[j]
+        hidden = sigmoid(hidden + hidden_bias[i])
+        hiddens.append(hidden)
+    
+    outputs = []
+    for i in range(OUTPUTS):
+        output = 0
+        for j in range(HIDDEN):
+            output += output_weights[i][j] * hiddens[j]
+        output = sigmoid(output + output_bias[i])
+        outputs.append(output)
+    
+    return output
+
+
+def learn(inputs,targets,alpha=0.1):
+    global hidden_weights, hidden_bias
+    global output_weights, output_bias
+    
+    hiddens = []
+    for i in range(HIDDEN):
+        hidden = 0
+        for j in range(INPUTS):
+            hidden += hidden_weights[i][j] * inputs[j]
+        hidden = sigmoid(hidden + hidden_bias[i])
+        hiddens.append(hidden)
+    
+    outputs = []
+    for i in range(OUTPUTS):
+        output = 0
+        for j in range(HIDDEN):
+            output += output_weights[i][j] * hiddens[j]
+        output = sigmoid(output + output_bias[i])
+        outputs.append(output)
+    
+    errors = []
+    for i in range(OUTPUTS):
+        error = targets[i] - outputs[i]
+        errors.append(error)
+    
+    derrors = []
+    for i in range(OUTPUTS):
+        derror = errors[i] * sigmoid_prime(outputs[i])
+        derrors.append(derror)
+    
+    ds = [0] * HIDDEN
+    for i in range(OUTPUTS):
+        for j in range(HIDDEN):
+            ds[j] += derrors[i] * output_weights[i][j] * sigmoid_prime(hiddens[j])
+    
+    for i in range(OUTPUTS):
+        for j in range(HIDDEN):
+            output_weights[i][j] += alpha * hiddens[j] * derrors[i]
+        output_bias[i] += alpha * derrors[i]
+    
+    for i in range(HIDDEN):
+        for j in range(INPUTS):
+            hidden_weights[i][j] += alpha * inputs[j] * ds[i]
+        hidden_bias[i] += alpha * ds[i]
+
+
+inputs = [
+        [0,0],
+        [0,1],
+        [1,0],
+        [1,1]
+    ]
+
+outputs = [
+        [0],
+        [1],
+        [1],
+        [0]
+    ]
+
+
+for i in range(10000):
+    indexes = [0,1,2,3]
+    random.shuffle(indexes)
+    for j in indexes:
+        learn(inputs[j],outputs[j],alpha=0.2)
+    
+    if (i+1) % 1000 == 0:
+        cost = 0
+        for j in range(4):
+            o = predict(inputs[j])
+            cost += (outputs[j][0] - o) ** 2
+        cost /= 4
+        print(i+1, "mean squared error:", cost)        
+
+
+print(inputs[0],predict(inputs[0]))
+print(inputs[1],predict(inputs[1]))
+print(inputs[2],predict(inputs[2]))
+print(inputs[3],predict(inputs[3]))
+```
+
+Example output:
+
+```
+1000 mean squared error: 0.2499588972948906
+2000 mean squared error: 0.24965939126451603
+3000 mean squared error: 0.24005845753480698
+4000 mean squared error: 0.17413835776113218
+5000 mean squared error: 0.02847387001541219
+6000 mean squared error: 0.007179245243490972
+7000 mean squared error: 0.0037596864717737103
+8000 mean squared error: 0.0024862050801342387
+9000 mean squared error: 0.0018376288895168352
+10000 mean squared error: 0.0014490486801108566
+[0, 0] 0.032098702111815376
+[0, 1] 0.9637733122087175
+[1, 0] 0.9639200700462749
+[1, 1] 0.046386784641615345
+```
