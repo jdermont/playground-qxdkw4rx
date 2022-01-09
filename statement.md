@@ -2,7 +2,9 @@
 
 XOR example is a toy problem in machine learning community, a hello world for introducing neural networks. It means you have to build and train the neural network so that given 2 inputs it will output what a XOR function would output (at least close to it).
 
-This isn't math heavy explanatory tutorial, there are plenty of them out there. I assume you have some vague knowledge of neural networks and try to write a simple one. This article is just a bunch of simple python scripts that implement neural networks. No numpy or other libraries are used, so they should be easily translatable to other languages.
+This isn't math heavy explanatory tutorial, there are plenty of them out there. Just google "neural network xor example", and you'll get for example [1](https://towardsdatascience.com/implementing-the-xor-gate-using-backpropagation-in-neural-networks-c1f255b4f20d) and [2](https://towardsdatascience.com/how-neural-networks-solve-the-xor-problem-59763136bdd7) with detailed explanation. I assume you have some vague knowledge of neural networks and try to write a simple one. This article is just a bunch of simple python scripts that implement neural networks. No numpy or other libraries are used, so they should be easily translatable to other languages.
+
+Codingame doesn't have NN specific libraries. For Codingame people mostly train locally using NN libraries, and just copy the learned weights and implement the forward propagation themselves in their language.
 
 All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions. The loss function is mean squared error.
 
