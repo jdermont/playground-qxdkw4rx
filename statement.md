@@ -17,23 +17,22 @@ import random
 import math
 
 VARIANCE_W = 0.5
-VARIANCE_B = 0.1
 w11 = random.uniform(-VARIANCE_W,VARIANCE_W)
 w21 = random.uniform(-VARIANCE_W,VARIANCE_W)
-b1 = random.uniform(-VARIANCE_B,VARIANCE_B)
+b1 = 0
 
 w12 = random.uniform(-VARIANCE_W,VARIANCE_W)
 w22 = random.uniform(-VARIANCE_W,VARIANCE_W)
-b2 = random.uniform(-VARIANCE_B,VARIANCE_B)
+b2 = 0
 
 w13 = random.uniform(-VARIANCE_W,VARIANCE_W)
 w23 = random.uniform(-VARIANCE_W,VARIANCE_W)
-b3 = random.uniform(-VARIANCE_B,VARIANCE_B)
+b3 = 0
 
 o1 = random.uniform(-VARIANCE_W,VARIANCE_W)
 o2 = random.uniform(-VARIANCE_W,VARIANCE_W)
 o3 = random.uniform(-VARIANCE_W,VARIANCE_W)
-ob = random.uniform(-VARIANCE_B,VARIANCE_B)
+ob = 0
 
 
 def sigmoid(x):
@@ -125,10 +124,9 @@ for epoch in range(1,10001):
         print("epoch", epoch, "mean squared error:", cost)       
         
 
-print(0,0,predict(0,0))
-print(1,0,predict(1,0))
-print(0,1,predict(0,1))
-print(1,1,predict(1,1))
+for i in range(4):
+    result = predict(inputs[i])
+    print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
 ```
 
 Example output:
