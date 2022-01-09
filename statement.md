@@ -345,6 +345,7 @@ def sigmoid(x):
 def sigmoid_prime(x): # x already sigmoided
     return x * (1 - x)
 
+
 def tanh(x):
     return math.tanh(x)
 
@@ -453,3 +454,23 @@ for i in range(4):
     result = predict(inputs[i])
     print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
 ```
+
+Example output:
+```
+1000 mean squared error: 0.0061729073060459915
+2000 mean squared error: 0.0015754154512582549
+3000 mean squared error: 0.0008510341785755552
+4000 mean squared error: 0.0005731795112170564
+5000 mean squared error: 0.00042899519927730044
+6000 mean squared error: 0.0003414967710025598
+7000 mean squared error: 0.0002830319449863964
+8000 mean squared error: 0.00024133098714384138
+9000 mean squared error: 0.00021014923444340877
+10000 mean squared error: 0.0001859852279128196
+for input [0, 0] expected 0 predicted 0.01346 which is correct
+for input [0, 1] expected 1 predicted 0.9888 which is correct
+for input [1, 0] expected 1 predicted 0.9862 which is correct
+for input [1, 1] expected 0 predicted 0.01573 which is correct
+```
+
+See how faster and better it converges than only sigmoid one. 
