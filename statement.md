@@ -6,7 +6,7 @@ This isn't math heavy explanatory tutorial, there are plenty of them out there. 
 
 Codingame doesn't have NN specific libraries. For Codingame people mostly train locally using NN libraries, and just copy the learned weights and implement the forward propagation themselves in their language.
 
-All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions. The loss function is mean squared error.
+All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions, which would be required for mini-batch. The loss function is mean squared error.
 
 # First script
 
