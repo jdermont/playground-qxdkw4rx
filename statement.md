@@ -310,3 +310,139 @@ for input [1, 1] expected 0 predicted 0.06596 which is correct
 
 You can play around with the number of hidden units.
 
+
+# Third script
+
+This one is exactly as second script, except the activation function for hidden layer is tanh, instead of sigmoid. Also, sigmoid_prime is replaced by tanh_prime in hidden layer during training.
+
+```python runnable
+import random
+import math
+
+VARIANCE_W = 0.5
+
+INPUTS = 2
+HIDDEN = 3
+OUTPUTS = 1
+
+hidden_weights = []
+for _ in range(HIDDEN):
+    hidden_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(INPUTS)])
+
+hidden_bias = [0] * HIDDEN
+
+output_weights = []
+for _ in range(OUTPUTS):
+    output_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(HIDDEN)])
+    
+output_bias = [0] * OUTPUTS
+
+
+def sigmoid(x):
+    return 1.0 / (1.0 + math.exp(-x))
+
+
+def sigmoid_prime(x): # x already sigmoided
+    return x * (1 - x)
+
+
+def predict(inputs):
+    hiddens = []
+    for i in range(HIDDEN):
+        hidden = 0
+        for j in range(INPUTS):
+            hidden += hidden_weights[i][j] * inputs[j]
+        hidden = sigmoid(hidden + hidden_bias[i])
+        hiddens.append(hidden)
+    
+    outputs = []
+    for i in range(OUTPUTS):
+        output = 0
+        for j in range(HIDDEN):
+            output += output_weights[i][j] * hiddens[j]
+        output = sigmoid(output + output_bias[i])
+        outputs.append(output)
+    
+    return output
+
+
+def learn(inputs,targets,alpha=0.1):
+    global hidden_weights, hidden_bias
+    global output_weights, output_bias
+    
+    hiddens = []
+    for i in range(HIDDEN):
+        hidden = 0
+        for j in range(INPUTS):
+            hidden += hidden_weights[i][j] * inputs[j]
+        hidden = sigmoid(hidden + hidden_bias[i])
+        hiddens.append(hidden)
+    
+    outputs = []
+    for i in range(OUTPUTS):
+        output = 0
+        for j in range(HIDDEN):
+            output += output_weights[i][j] * hiddens[j]
+        output = sigmoid(output + output_bias[i])
+        outputs.append(output)
+    
+    errors = []
+    for i in range(OUTPUTS):
+        error = targets[i] - outputs[i]
+        errors.append(error)
+    
+    derrors = []
+    for i in range(OUTPUTS):
+        derror = errors[i] * sigmoid_prime(outputs[i])
+        derrors.append(derror)
+    
+    ds = [0] * HIDDEN
+    for i in range(OUTPUTS):
+        for j in range(HIDDEN):
+            ds[j] += derrors[i] * output_weights[i][j] * sigmoid_prime(hiddens[j])
+    
+    for i in range(OUTPUTS):
+        for j in range(HIDDEN):
+            output_weights[i][j] += alpha * hiddens[j] * derrors[i]
+        output_bias[i] += alpha * derrors[i]
+    
+    for i in range(HIDDEN):
+        for j in range(INPUTS):
+            hidden_weights[i][j] += alpha * inputs[j] * ds[i]
+        hidden_bias[i] += alpha * ds[i]
+
+
+inputs = [
+        [0,0],
+        [0,1],
+        [1,0],
+        [1,1]
+    ]
+
+outputs = [
+        [0],
+        [1],
+        [1],
+        [0]
+    ]
+
+
+for i in range(10000):
+    indexes = [0,1,2,3]
+    random.shuffle(indexes)
+    for j in indexes:
+        learn(inputs[j],outputs[j],alpha=0.2)
+    
+    if (i+1) % 1000 == 0:
+        cost = 0
+        for j in range(4):
+            o = predict(inputs[j])
+            cost += (outputs[j][0] - o) ** 2
+        cost /= 4
+        print(i+1, "mean squared error:", cost)        
+
+
+for i in range(4):
+    result = predict(inputs[i])
+    print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
+```
