@@ -151,7 +151,7 @@ for input [1, 0] expected 1 predicted 0.9684 which is correct
 for input [1, 1] expected 0 predicted 0.03951 which is correct
 ```
 
-Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization.
+Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization ([1](https://machinelearningmastery.com/weight-initialization-for-deep-learning-neural-networks/), [2](https://towardsdatascience.com/weight-initialization-in-neural-networks-a-journey-from-the-basics-to-kaiming-954fb9b47c79), [3](https://towardsdatascience.com/weight-initialization-techniques-in-neural-networks-26c649eb3b78)).
 
 You can play around with learning rate (alpha) and see how it affects the speed of learning. It is one of the most important hyperparameters in machine learning world. For this example, the orders of around 0.1 is used. In real world applications, 0.001, 0.0001 or even less are used, along with some decay rate. See [1](https://machinelearningmastery.com/understand-the-dynamics-of-learning-rate-on-deep-learning-neural-networks/), [2](https://www.jeremyjordan.me/nn-learning-rate/), [3](https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1) for details.
 
@@ -480,7 +480,7 @@ See how faster and better it converges than only sigmoid one.
 
 The common choice for activation function is [relu](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/). Has plenty advantages, but for me the most important one is speed. In game tree search, doing bunch of relus is much faster than doing bunch of tanhs.
 
-For exercise, replace tanh and tanh_prime with relu and relu_prime accordingly and see how does it affect training. I remark that relu seems more sensitive to weights initialization as in this simple example it may diverge more often.
+For exercise, replace tanh and tanh_prime with relu and relu_prime accordingly and see how does it affect training. I remark that relu seems more sensitive to weights initialization, in the simplest xor example it diverges more often.
 
 ```python
 def relu(x):
