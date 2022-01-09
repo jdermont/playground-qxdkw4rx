@@ -345,6 +345,13 @@ def sigmoid(x):
 def sigmoid_prime(x): # x already sigmoided
     return x * (1 - x)
 
+def tanh(x):
+    return math.tanh(x)
+
+
+def tanh_prime(x): # x already tanhed
+    return 1 - x * x
+
 
 def predict(inputs):
     hiddens = []
@@ -352,7 +359,7 @@ def predict(inputs):
         hidden = 0
         for j in range(INPUTS):
             hidden += hidden_weights[i][j] * inputs[j]
-        hidden = sigmoid(hidden + hidden_bias[i])
+        hidden = tanh(hidden + hidden_bias[i])
         hiddens.append(hidden)
     
     outputs = []
@@ -375,7 +382,7 @@ def learn(inputs,targets,alpha=0.1):
         hidden = 0
         for j in range(INPUTS):
             hidden += hidden_weights[i][j] * inputs[j]
-        hidden = sigmoid(hidden + hidden_bias[i])
+        hidden = tanh(hidden + hidden_bias[i])
         hiddens.append(hidden)
     
     outputs = []
@@ -399,7 +406,7 @@ def learn(inputs,targets,alpha=0.1):
     ds = [0] * HIDDEN
     for i in range(OUTPUTS):
         for j in range(HIDDEN):
-            ds[j] += derrors[i] * output_weights[i][j] * sigmoid_prime(hiddens[j])
+            ds[j] += derrors[i] * output_weights[i][j] * tanh_prime(hiddens[j])
     
     for i in range(OUTPUTS):
         for j in range(HIDDEN):
