@@ -8,6 +8,7 @@ Codingame doesn't have NN specific libraries. For Codingame people mostly train 
 
 All the scripts use stochastic gradient descent to train the neural network, one data row at a time, so no need for matrix tranpositions, which would be required for mini-batch. The loss function is mean squared error.
 
+
 # First script
 
 This is the simplest script, an implementation of ![temporary nn](ugly.png "NN")
@@ -152,7 +153,7 @@ for input [1, 1] expected 0 predicted 0.03951 which is correct
 
 Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization.
 
-You can play around with learning rate (alpha) and see how it affects the speed of learning. It is one of the most important hyperparameters in machine learning world. For this example, the orders of around 0.1 is used. In real world applications, 0.001, 0.0001 or even less are used, along with some decay rate.
+You can play around with learning rate (alpha) and see how it affects the speed of learning. It is one of the most important hyperparameters in machine learning world. For this example, the orders of around 0.1 is used. In real world applications, 0.001, 0.0001 or even less are used, along with some decay rate. See [1](https://machinelearningmastery.com/understand-the-dynamics-of-learning-rate-on-deep-learning-neural-networks/), [2](https://www.jeremyjordan.me/nn-learning-rate/), [3](https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1) for details.
 
 
 # Second script
@@ -475,4 +476,18 @@ for input [1, 0] expected 1 predicted 0.9862 which is correct
 for input [1, 1] expected 0 predicted 0.01573 which is correct
 ```
 
-See how faster and better it converges than only sigmoid one. 
+See how faster and better it converges than only sigmoid one.
+
+The common choice for activation function is [relu](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/). Has plenty advantages, but for me the most important one is speed. In game tree search, doing bunch of relus is much faster than doing bunch of tanhs.
+
+For exercise, replace tanh and tanh_prime with relu and relu_prime accordingly and see how does it affect training. I remark that relu seems more sensitive to weights initialization as in this simple example it may diverge more often.
+
+```python
+def relu(x):
+    return max(0,x)
+
+
+def relu_prime(x):
+    if x <= 0: return 0
+    else: return 1
+```
