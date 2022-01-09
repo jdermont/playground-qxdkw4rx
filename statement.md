@@ -162,7 +162,6 @@ import random
 import math
 
 VARIANCE_W = 0.5
-VARIANCE_B = 0.1
 
 INPUTS = 2
 HIDDEN = 3
@@ -172,13 +171,13 @@ hidden_weights = []
 for _ in range(HIDDEN):
     hidden_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(INPUTS)])
 
-hidden_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(HIDDEN)]
+hidden_bias = [0] * HIDDEN
 
 output_weights = []
 for _ in range(OUTPUTS):
     output_weights.append([random.uniform(-VARIANCE_W,VARIANCE_W) for _ in range(HIDDEN)])
     
-output_bias = [random.uniform(-VARIANCE_B,VARIANCE_B) for _ in range(OUTPUTS)]
+output_bias = [0] * OUTPUTS
 
 
 def sigmoid(x):
@@ -293,20 +292,20 @@ for i in range(4):
 Example output:
 
 ```
-1000 mean squared error: 0.2499588972948906
-2000 mean squared error: 0.24965939126451603
-3000 mean squared error: 0.24005845753480698
-4000 mean squared error: 0.17413835776113218
-5000 mean squared error: 0.02847387001541219
-6000 mean squared error: 0.007179245243490972
-7000 mean squared error: 0.0037596864717737103
-8000 mean squared error: 0.0024862050801342387
-9000 mean squared error: 0.0018376288895168352
-10000 mean squared error: 0.0014490486801108566
-[0, 0] 0.032098702111815376
-[0, 1] 0.9637733122087175
-[1, 0] 0.9639200700462749
-[1, 1] 0.046386784641615345
+1000 mean squared error: 0.25001130384302916
+2000 mean squared error: 0.24998178999223236
+3000 mean squared error: 0.2498882299395278
+4000 mean squared error: 0.2487285310117196
+5000 mean squared error: 0.19301651904542888
+6000 mean squared error: 0.06884957172680736
+7000 mean squared error: 0.011780981900514784
+8000 mean squared error: 0.005242561964051928
+9000 mean squared error: 0.0032150923746817523
+10000 mean squared error: 0.0022766661560815666
+for input [0, 0] expected 0 predicted 0.02494 which is correct
+for input [0, 1] expected 1 predicted 0.9528 which is correct
+for input [1, 0] expected 1 predicted 0.9563 which is correct
+for input [1, 1] expected 0 predicted 0.06596 which is correct
 ```
 
 You can play around with the number of hidden units.
