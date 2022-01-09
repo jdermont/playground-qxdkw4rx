@@ -125,30 +125,32 @@ for epoch in range(1,10001):
         
 
 for i in range(4):
-    result = predict(inputs[i])
-    print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
+    result = predict(INPUTS[i][0],INPUTS[i][1])
+    print("for input", INPUTS[i], "expected", OUTPUTS[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==OUTPUTS[i][0] else "incorrect")
 ```
 
 Example output:
 
 ```
-epoch 1000 mean squared error: 0.2499876271419115
-epoch 2000 mean squared error: 0.2499688242837126
-epoch 3000 mean squared error: 0.24988612392100873
-epoch 4000 mean squared error: 0.24903213808270375
-epoch 5000 mean squared error: 0.20392068756493792
-epoch 6000 mean squared error: 0.06346297881590131
-epoch 7000 mean squared error: 0.01137474589491641
-epoch 8000 mean squared error: 0.005176747319816359
-epoch 9000 mean squared error: 0.0031937304736529845
-epoch 10000 mean squared error: 0.0022656890991194886
-0 0 0.027649625886219092
-1 0 0.95846511144229
-0 1 0.9433905288343537
-1 1 0.05803856813942385
+epoch 1000 mean squared error: 0.24950644703013328
+epoch 2000 mean squared error: 0.21033216889786982
+epoch 3000 mean squared error: 0.06970183505211733
+epoch 4000 mean squared error: 0.010193355003568688
+epoch 5000 mean squared error: 0.004621174723851184
+epoch 6000 mean squared error: 0.002889802406873843
+epoch 7000 mean squared error: 0.0020756513163735827
+epoch 8000 mean squared error: 0.001609116960177383
+epoch 9000 mean squared error: 0.0013089350608506563
+epoch 10000 mean squared error: 0.0011005064043563537
+for input [0, 0] expected 0 predicted 0.02906 which is correct
+for input [0, 1] expected 1 predicted 0.9684 which is correct
+for input [1, 0] expected 1 predicted 0.9684 which is correct
+for input [1, 1] expected 0 predicted 0.03951 which is correct
 ```
 
-Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization. You can play around with the learning rate (alpha) or the random bounds (VARIANCE_W, VARIANCE_B).
+Your mileage may vary. Sometimes this simple net will diverge and output for all inputs the 0.666..., or it would need more iterations to train. It's normal as it is more sensitive to starting random weights than more complex models. NN libraries suffer from that too, but they can mitigate it by smarter weights initialization.
+
+You can play around with learning rate (alpha) and see how it affects the speed of learning. It is one of the most important hyperparameters in machine learning world. For this example, the orders of around 0.1 is used. In real world applications, 0.001, 0.0001 or even less are used, along with some decay rate.
 
 
 # Second script
@@ -283,10 +285,9 @@ for i in range(10000):
         print(i+1, "mean squared error:", cost)        
 
 
-print(inputs[0],predict(inputs[0]))
-print(inputs[1],predict(inputs[1]))
-print(inputs[2],predict(inputs[2]))
-print(inputs[3],predict(inputs[3]))
+for i in range(4):
+    result = predict(inputs[i])
+    print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
 ```
 
 Example output:
