@@ -495,7 +495,7 @@ def relu_prime(x):
 
 # Fourth script
 
-The same as third script (tanh in hidden layer).
+The same as third script (tanh in hidden layer), but this time with momentum [1](https://cnl.salk.edu/~schraudo/teach/NNcourse/momrate.html) [2](https://d2l.ai/chapter_optimization/momentum.html).
 
 ```python runnable
 import random
@@ -560,7 +560,7 @@ def predict(inputs):
     return output
 
 
-def learn(inputs,targets,alpha=0.1,lambda=0.8):
+def learn(inputs,targets,alpha=0.1,lambd=0.8):
     global hidden_weights, hidden_bias
     global output_weights, output_bias
     global hidden_momentum, output_momentum
@@ -598,13 +598,13 @@ def learn(inputs,targets,alpha=0.1,lambda=0.8):
     
     for i in range(OUTPUTS):
         for j in range(HIDDEN):
-            output_momentum[i][j] = lambda * output_momentum[i][j] + alpha * hiddens[j] * derrors[i]
+            output_momentum[i][j] = lambd * output_momentum[i][j] + alpha * hiddens[j] * derrors[i]
             output_weights[i][j] += output_momentum[i][j]
         output_bias[i] += alpha * derrors[i]
     
     for i in range(HIDDEN):
         for j in range(INPUTS):
-            hidden_momentum[i][j] = lambda * hidden_momentum[i][j] + alpha * inputs[j] * ds[i]
+            hidden_momentum[i][j] = lambd * hidden_momentum[i][j] + alpha * inputs[j] * ds[i]
             hidden_weights[i][j] += hidden_momentum[i][j]
         hidden_bias[i] += alpha * ds[i]
 
@@ -628,7 +628,7 @@ for i in range(10000):
     indexes = [0,1,2,3]
     random.shuffle(indexes)
     for j in indexes:
-        learn(inputs[j],outputs[j],alpha=0.2)
+        learn(inputs[j],outputs[j],alpha=0.2,lambd=0.8)
     
     if (i+1) % 1000 == 0:
         cost = 0
