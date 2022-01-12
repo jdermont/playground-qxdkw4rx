@@ -476,7 +476,7 @@ for input [1, 0] expected 1 predicted 0.9862 which is correct
 for input [1, 1] expected 0 predicted 0.01573 which is correct
 ```
 
-See how faster and better it converges than only sigmoid one.
+See how faster and better it converges than only sigmoid one. ![tanh graph](tanh.png "tanh")
 
 The common choice for activation function is [relu](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/). Has plenty advantages, but for me the most important one is speed. In game tree search, doing bunch of relus is much faster than doing bunch of tanhs.
 
