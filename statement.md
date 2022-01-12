@@ -643,3 +643,23 @@ for i in range(4):
     result = predict(inputs[i])
     print("for input", inputs[i], "expected", outputs[i][0], "predicted", f"{result:4.4}", "which is", "correct" if round(result)==outputs[i][0] else "incorrect")
 ```
+
+Example output:
+```
+1000 mean squared error: 0.00044142174881360634
+2000 mean squared error: 0.00020205770098357436
+3000 mean squared error: 0.00013037626876152424
+4000 mean squared error: 9.606031869410035e-05
+5000 mean squared error: 7.598012945270696e-05
+6000 mean squared error: 6.281017989283364e-05
+7000 mean squared error: 5.351418734233088e-05
+8000 mean squared error: 4.660449366354482e-05
+9000 mean squared error: 4.1269082890237664e-05
+10000 mean squared error: 3.702491046845857e-05
+for input [0, 0] expected 0 predicted 0.002033 which is correct
+for input [0, 1] expected 1 predicted 0.9932 which is correct
+for input [1, 0] expected 1 predicted 0.9932 which is correct
+for input [1, 1] expected 0 predicted 0.007203 which is correct
+```
+
+New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range.
