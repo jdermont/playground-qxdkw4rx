@@ -664,7 +664,7 @@ for input [1, 0] expected 1 predicted 0.9932 which is correct
 for input [1, 1] expected 0 predicted 0.007203 which is correct
 ```
 
-New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range. 
+New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range. It is very important hyperparameter, next to learning rate.
 
 See how much faster does it converge than the version without momentum. Note that X is 1000 iterations instead of 10000. ![momentum graph](momentum.png "momentum")
 
@@ -685,6 +685,6 @@ nn.predict(mnist)
 # yay we have trained our first neural network completely by ourselves!
 ```
 
-I wouldn't learn much from that. I am dumb as the NNs I create, I learn by examples. I need many similar, slightly increasing in difficulty examples to grasp the new concept. Of course the neural network world is much bigger than that, but hopefully the scripts I provided will give you some insight into NNs and encourage you to learn more about them.
+I wouldn't learn much from that. I am dumb as the NNs I create, I learn by examples. I need many many similar, slightly increasing in difficulty examples to grasp the new concept. Of course the neural network world is much bigger than that, but hopefully the scripts I provided will give you some insight into NNs and encourage you to learn more about them.
 
 I'd like to thank Wontomino for providing some feedback on this article.
