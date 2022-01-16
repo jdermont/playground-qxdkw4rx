@@ -687,4 +687,6 @@ nn.predict(mnist)
 
 I wouldn't learn much from that. I am dumb as the NNs I create, I learn by examples. I need many many similar, slightly increasing in difficulty examples to grasp the new concept. Of course the neural network world is much bigger than that, but hopefully the scripts I provided will give you some insight into NNs and encourage you to learn more about them.
 
+Then after grasping the basic concepts, I would use the libraries. Most common are pytorch and keras/tensorflow. No need to implement Adam or other optimization, smarter weights initialization, regularization etc. And it's easy to prototype and test various NN architectures (multiple hiddden layers, different units) to see which one is the best.
+
 I'd like to thank Wontomino for providing some feedback on this article.
