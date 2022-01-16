@@ -497,6 +497,8 @@ def relu_prime(x):
 
 The same as third script (tanh in hidden layer), but this time with momentum [1](https://cnl.salk.edu/~schraudo/teach/NNcourse/momrate.html) [2](https://d2l.ai/chapter_optimization/momentum.html).
 
+Let's add momentum next to the weights. Here instead of updating weights directly, we update the momentum and then the weights according to the momentum.
+
 ```python runnable
 import random
 import math
@@ -662,4 +664,8 @@ for input [1, 0] expected 1 predicted 0.9932 which is correct
 for input [1, 1] expected 0 predicted 0.007203 which is correct
 ```
 
-New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range.
+New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range. 
+
+See how much faster does it converge than the version without momentum. Note that X is 1000 iterations instead of 10000. ![momentum graph](momentum.png "momentum")
+
+Stochastic gradient descent with momentum is a standard baseline training algorithm. There are various [optimizations](https://ruder.io/optimizing-gradient-descent/) proposed with Adam being the preferred choice. Using some formula they update individual momentum, learning rates and possibly other things. Depending on the problem they may converge much faster than standard SGD.
