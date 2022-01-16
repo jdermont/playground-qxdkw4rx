@@ -664,7 +664,7 @@ for input [1, 0] expected 1 predicted 0.9932 which is correct
 for input [1, 1] expected 0 predicted 0.007203 which is correct
 ```
 
-New hyperparamater has been introduced, commonly called lambda. You can play with it, the usual values are within [0.8,0.99] range. It is very important hyperparameter, next to learning rate.
+New hyperparamater has been introduced, commonly called lambda. It says how much the past updates should affect the current update. You can play with it, the usual values are within [0.8,0.99] range. It is very important hyperparameter, next to learning rate.
 
 See how much faster does it converge than the version without momentum. Note that X is 1000 iterations instead of 10000. ![momentum graph](momentum.png "momentum")
 
