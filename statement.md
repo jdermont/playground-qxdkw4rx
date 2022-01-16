@@ -495,7 +495,7 @@ def relu_prime(x):
 
 # Fourth script
 
-The same as third script (tanh in hidden layer), but this time with momentum [1](https://cnl.salk.edu/~schraudo/teach/NNcourse/momrate.html) [2](https://d2l.ai/chapter_optimization/momentum.html).
+The same as third script (tanh in hidden layer), but this time with momentum [1](https://cnl.salk.edu/~schraudo/teach/NNcourse/momrate.html), [2](https://d2l.ai/chapter_optimization/momentum.html).
 
 Let's add momentum next to the weights. Here instead of updating weights directly, we update the momentum and then the weights according to the momentum.
 
@@ -669,3 +669,22 @@ New hyperparamater has been introduced, commonly called lambda. You can play wit
 See how much faster does it converge than the version without momentum. Note that X is 1000 iterations instead of 10000. ![momentum graph](momentum.png "momentum")
 
 Stochastic gradient descent with momentum is a standard baseline training algorithm. There are various [optimizations](https://ruder.io/optimizing-gradient-descent/) proposed with Adam being the preferred choice. Using some formula they update individual momentum, learning rates and possibly other things. Depending on the problem they may converge much faster than standard SGD.
+
+
+# Summary
+
+I wrote this article because in the beginning I struggled to understand how to train neural networks. Most tutorials introduce heavy math, then use python libs with few lines and call it a day.
+
+```python
+import nnlib
+import mnist
+
+nn = nnlib.NeuralNetwork()
+nn.learn(mnist)
+nn.predict(mnist)
+# yay we have trained our first neural network completely by ourselves!
+```
+
+I wouldn't learn much from that. I am dumb as the NNs I create, I learn by examples. I need many similar, slightly increasing in difficulty examples to grasp the new concept. Of course the neural network world is much bigger than that, but hopefully the scripts I provided will give you some insight into NNs and encourage you to learn more about them.
+
+I'd like to thank Wontomino for providing some feedback on this article.
